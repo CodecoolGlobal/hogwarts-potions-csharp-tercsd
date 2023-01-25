@@ -10,6 +10,6 @@ namespace HogwartsPotions.Models.Entities
 
         public int Capacity { get; set; }
 
-        public HashSet<Student> Residents { get; set; } = new HashSet<Student>();
+        public ICollection<Student> Residents { get; set; }
     }
 }
