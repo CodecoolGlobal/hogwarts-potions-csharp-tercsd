@@ -1,6 +1,7 @@
 using HogwartsPotions.Models.Entities;
 using HogwartsPotions.Models.Enums;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -103,6 +104,26 @@ namespace HogwartsPotions.Models
             return null;
         }
 
+        public async Task<Potion> AddBrewingPotion(Recipe potion)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<Potion> AddToPotion(long potionId, Ingredient ingredient)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<Potion> GetPotionById(long potionId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<List<Recipe>> GetPotionHelpById(long potionId)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task AddRoom(Room room)
         {
             try
@@ -166,7 +187,5 @@ namespace HogwartsPotions.Models
                 .Where(r => !r.Residents.Any(s => s.PetType == PetType.Cat || s.PetType == PetType.Owl))
                 .ToListAsync();
         }
-
-
     }
 }
