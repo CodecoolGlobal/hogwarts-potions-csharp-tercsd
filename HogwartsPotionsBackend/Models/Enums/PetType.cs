@@ -1,10 +1,9 @@
-﻿namespace HogwartsPotions.Models.Enums
+﻿namespace HogwartsPotionsBackend.Models.Enums;
+
+public enum PetType : byte
 {
-    public enum PetType : byte
-    {
-        None,
-        Cat,
-        Rat,
-        Owl
-    }
+    None,
+    Cat,
+    Rat,
+    Owl
 }

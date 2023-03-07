@@ -1,10 +1,9 @@
-﻿namespace HogwartsPotions.Models.Enums
+﻿namespace HogwartsPotionsBackend.Models.Enums;
+
+public enum HouseType : byte
 {
-    public enum HouseType : byte
-    {
-        Gryffindor,
-        Hufflepuff,
-        Ravenclaw,
-        Slytherin
-    }
+    Gryffindor,
+    Hufflepuff,
+    Ravenclaw,
+    Slytherin
 }

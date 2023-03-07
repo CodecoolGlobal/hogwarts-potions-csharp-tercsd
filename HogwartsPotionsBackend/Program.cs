@@ -1,6 +1,6 @@
-using HogwartsPotions.Data;
-using HogwartsPotions.Models;
-using HogwartsPotions.Services;
+using HogwartsPotionsBackend.Data;
+using HogwartsPotionsBackend.Models;
+using HogwartsPotionsBackend.Services;
 using HogwartsPotionsBackend.Configurations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;

@@ -1,16 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HogwartsPotions.Models.Entities
+namespace HogwartsPotionsBackend.Models.Entities;
+
+public class Ingredient
 {
-    public class Ingredient
-    {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public long ID { get; set; }
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public long ID { get; set; }
 
-        public string Name { get; set; }
+    public string Name { get; set; }
 
-        public virtual ICollection<Potion> Potions { get; set; }
-        public virtual ICollection<Recipe> Recipes { get; set; }
-    }
+    public virtual ICollection<Potion> Potions { get; set; }
+    public virtual ICollection<Recipe> Recipes { get; set; }
 }

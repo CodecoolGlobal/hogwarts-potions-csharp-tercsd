@@ -1,16 +1,15 @@
-﻿using HogwartsPotions.Models.Entities;
+﻿using HogwartsPotionsBackend.Models.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace HogwartsPotions.Services
+namespace HogwartsPotionsBackend.Services;
+
+public interface IRoomService
 {
-    public interface IRoomService
-    {
-        Task<List<Room>> GetAllRooms();
-        Task<Room> GetRoom(long roomId);
-        Task AddRoom(Room room);
-        Task UpdateRoom(long id, Room room);
-        Task DeleteRoom(long id);
-        Task<List<Room>> GetRoomsForRatOwners();
-    }
+    Task<List<Room>> GetAllRooms();
+    Task<Room> GetRoom(long roomId);
+    Task AddRoom(Room room);
+    Task UpdateRoom(long id, Room room);
+    Task DeleteRoom(long id);
+    Task<List<Room>> GetRoomsForRatOwners();
 }

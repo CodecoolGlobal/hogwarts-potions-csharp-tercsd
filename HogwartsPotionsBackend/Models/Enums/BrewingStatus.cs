@@ -1,9 +1,8 @@
-﻿namespace HogwartsPotions.Models.Enums
+﻿namespace HogwartsPotionsBackend.Models.Enums;
+
+public enum BrewingStatus : byte
 {
-    public enum BrewingStatus : byte
-    {
-        Brew,
-        Replica,
-        Discovery
-    }
+    Brew,
+    Replica,
+    Discovery
 }

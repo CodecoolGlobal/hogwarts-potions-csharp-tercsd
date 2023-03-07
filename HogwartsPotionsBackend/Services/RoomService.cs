@@ -1,12 +1,12 @@
-﻿using HogwartsPotions.Models;
-using HogwartsPotions.Models.Entities;
-using HogwartsPotions.Models.Enums;
+﻿using HogwartsPotionsBackend.Models;
+using HogwartsPotionsBackend.Models.Entities;
+using HogwartsPotionsBackend.Models.Enums;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HogwartsPotions.Services;
+namespace HogwartsPotionsBackend.Services;
 
 public class RoomService : IRoomService
 {
