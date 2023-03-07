@@ -66,11 +66,19 @@ public class RoomController : ControllerBase
         return result ? Ok() : BadRequest();
     }
 
+    [HttpGet("/room/available")]
+    public async Task<ActionResult<List<RoomDTO>>> GetAvailableRooms()
+    {
+        var rooms = await _service.GetAvailableRooms();
+        var roomDTOs = _mapper.Map<IEnumerable<RoomDTO>>(rooms);
+        return Ok(roomDTOs);
+    }
+
     [HttpGet("/room/rat-owners")]
     public async Task<ActionResult<List<RoomDTO>>> GetRoomsForRatOwners()
     {
-        var room = await _service.GetRoomsForRatOwners();
-        var roomDTO = _mapper.Map<RoomDTO>(room);
-        return Ok(roomDTO);
+        var rooms = await _service.GetRoomsForRatOwners();
+        var roomDTOs = _mapper.Map<IEnumerable<RoomDTO>>(rooms);
+        return Ok(roomDTOs);
     }
 }
