@@ -1,7 +1,7 @@
+using HogwartsPotionsBackend.Configurations;
 using HogwartsPotionsBackend.Data;
 using HogwartsPotionsBackend.Models;
 using HogwartsPotionsBackend.Services;
-using HogwartsPotionsBackend.Configurations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -18,10 +18,7 @@ var configuration =
 builder.Services.AddDbContext<HogwartsContext>(options =>
                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddControllers().AddJsonOptions(options =>
-{
-    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
-});
+builder.Services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

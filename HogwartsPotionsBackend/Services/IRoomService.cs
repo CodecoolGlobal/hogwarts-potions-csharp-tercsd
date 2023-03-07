@@ -7,9 +7,9 @@ namespace HogwartsPotionsBackend.Services;
 public interface IRoomService
 {
     Task<List<Room>> GetAllRooms();
-    Task<Room> GetRoom(long roomId);
-    Task AddRoom(Room room);
-    Task UpdateRoom(long id, Room room);
-    Task DeleteRoom(long id);
+    Task<Room?> GetRoom(long roomId);
+    Task<Room?> AddRoom(Room room);
+    Task<Room?> UpdateRoom(long id, Room room);
+    Task<bool> DeleteRoom(long id);
     Task<List<Room>> GetRoomsForRatOwners();
 }

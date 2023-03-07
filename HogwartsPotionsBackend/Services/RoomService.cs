@@ -17,13 +17,13 @@ public class RoomService : IRoomService
         _context = context;
     }
 
-    public async Task AddRoom(Room room)
+    public async Task<Room?> AddRoom(Room room)
     {
         try
         {
             _context.Rooms.Add(room);
-            await _context.SaveChangesAsync();
-            return;
+            var saveCount = await _context.SaveChangesAsync();
+            return saveCount > 0 ? room : null;
         }
         catch (DbUpdateException ex)
         {
@@ -31,7 +31,7 @@ public class RoomService : IRoomService
         }
     }
 
-    public async Task<Room> GetRoom(long roomId)
+    public async Task<Room?> GetRoom(long roomId)
     {
         return await _context.Rooms
             .Include(r => r.Residents)
@@ -47,14 +47,15 @@ public class RoomService : IRoomService
             .ToListAsync();
     }
 
-    public async Task UpdateRoom(long id, Room room)
+    public async Task<Room?> UpdateRoom(long id, Room room)
     {
         try
         {
             var roomToUpdate = await _context.Rooms.SingleOrDefaultAsync(r => r.ID == id);
+            if (roomToUpdate == null) return null;
             roomToUpdate.Capacity = room.Capacity;
             await _context.SaveChangesAsync();
-            return;
+            return roomToUpdate;
         }
         catch (DbUpdateException ex)
         {
@@ -62,15 +63,19 @@ public class RoomService : IRoomService
         }
     }
 
-    public async Task DeleteRoom(long id)
+    public async Task<bool> DeleteRoom(long id)
     {
         try
         {
             var roomToDelete = await _context.Rooms.SingleOrDefaultAsync(r => r.ID == id);
+            if (roomToDelete == null)
+            {
+                return false;
+            }
             _context.Rooms.Remove(roomToDelete);
             await _context.SaveChangesAsync();
 
-            return;
+            return true;
         }
         catch (DbUpdateException ex)
         {

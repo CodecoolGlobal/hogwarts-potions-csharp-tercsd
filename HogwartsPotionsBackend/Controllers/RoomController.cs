@@ -1,7 +1,8 @@
-﻿using HogwartsPotionsBackend.Models.Entities;
+﻿using AutoMapper;
+using HogwartsPotionsBackend.Models.DTOs;
+using HogwartsPotionsBackend.Models.Entities;
 using HogwartsPotionsBackend.Services;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -11,49 +12,65 @@ namespace HogwartsPotionsBackend.Controllers;
 public class RoomController : ControllerBase
 {
     private readonly IRoomService _service;
+    private readonly IMapper _mapper;
 
-    public RoomController(IRoomService service)
+    public RoomController(IRoomService service, IMapper mapper)
     {
         _service = service;
+        _mapper = mapper;
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<Room>>> GetAllRooms()
+    public async Task<ActionResult<List<RoomDTO>>> GetAllRooms()
     {
-        return Ok(await _service.GetAllRooms());
+        var rooms = await _service.GetAllRooms();
+        var roomDTOs = _mapper.Map<IEnumerable<RoomDTO>>(rooms);
+        return Ok(roomDTOs);
     }
 
     [HttpPost]
-    public async Task<ActionResult> AddRoom([FromBody] Room room)
+    public async Task<ActionResult> AddRoom([FromBody] NewRoomDTO newRoomDTO)
     {
-        await _service.AddRoom(room);
-        return Ok();
+        var newRoom = _mapper.Map<Room>(newRoomDTO);
+        var result = await _service.AddRoom(newRoom);
+        if (result == null) return BadRequest();
+        var roomDTO = _mapper.Map<RoomDTO>(result);
+
+        return Ok(roomDTO);
 
     }
 
     [HttpGet("/room/{id}")]
-    public async Task<ActionResult<Room>> GetRoomById(long id)
+    public async Task<ActionResult<RoomDTO>> GetRoomById(long id)
     {
-        return Ok(await _service.GetRoom(id));
+        var room = await _service.GetRoom(id);
+        if (room == null) return NotFound();
+        var roomDTO = _mapper.Map<RoomDTO>(room);
+        return Ok(roomDTO);
     }
 
     [HttpPut("/room/{id}")]
-    public async Task<ActionResult> UpdateRoomByIdAsync(long id, [FromBody] Room updatedRoom)
+    public async Task<ActionResult> UpdateRoomById(long id, [FromBody] RoomDTO roomDTO)
     {
-        await _service.UpdateRoom(id, updatedRoom);
-        return Ok();
+        var room = _mapper.Map<Room>(roomDTO);
+        var result = await _service.UpdateRoom(id, room);
+        if (result == null) return BadRequest();
+        var resultDTO = _mapper.Map<RoomDTO>(result);
+        return Ok(resultDTO);
     }
 
     [HttpDelete("/room/{id}")]
     public async Task<ActionResult> DeleteRoomById(long id)
     {
-        await _service.DeleteRoom(id);
-        return Ok();
+        var result = await _service.DeleteRoom(id);
+        return result ? Ok() : BadRequest();
     }
 
     [HttpGet("/room/rat-owners")]
-    public async Task<ActionResult<List<Room>>> GetRoomsForRatOwners()
+    public async Task<ActionResult<List<RoomDTO>>> GetRoomsForRatOwners()
     {
-        return Ok(await _service.GetRoomsForRatOwners());
+        var room = await _service.GetRoomsForRatOwners();
+        var roomDTO = _mapper.Map<RoomDTO>(room);
+        return Ok(roomDTO);
     }
 }

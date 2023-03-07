@@ -35,14 +35,14 @@ public class PotionService : IPotionService
             .ToListAsync();
     }
 
-    public async Task<Potion> AddPotion(Recipe potion)
+    public async Task<Potion?> AddPotion(Recipe potion)
     {
         if (potion.Ingredients.Any())
         {
             var newPotion = new Potion()
             {
                 Name = potion.Name,
-                Maker = await _context.Students.Where(s => s.ID == potion.Maker.ID).FirstAsync(),
+                Maker = await _context.Students.Where(s => s.ID == potion.StudentID).FirstAsync(),
                 Ingredients = new HashSet<Ingredient>(),
             };
 
@@ -92,20 +92,20 @@ public class PotionService : IPotionService
             }
 
             await _context.Potions.AddAsync(newPotion);
-            await _context.SaveChangesAsync();
-            return newPotion;
+            var resultCount = await _context.SaveChangesAsync();
+            return resultCount > 0 ? newPotion : null;
         }
         return null;
     }
 
-    public async Task<Potion> AddBrewingPotion(Recipe potion)
+    public async Task<Potion?> AddBrewingPotion(Recipe potion)
     {
         if (potion.Ingredients.Any())
         {
             var newPotion = new Potion()
             {
                 Name = potion.Name,
-                Maker = await _context.Students.Where(s => s.ID == potion.Maker.ID).FirstAsync(),
+                Maker = await _context.Students.Where(s => s.ID == potion.StudentID).FirstAsync(),
                 Ingredients = new HashSet<Ingredient>(),
             };
 
@@ -160,13 +160,13 @@ public class PotionService : IPotionService
             }
 
             await _context.Potions.AddAsync(newPotion);
-            await _context.SaveChangesAsync();
-            return newPotion;
+            var resultCount = await _context.SaveChangesAsync();
+            return resultCount > 0 ? newPotion : null;
         }
         return null;
     }
 
-    public async Task<Potion> AddToPotion(long potionId, Ingredient ingredient)
+    public async Task<Potion?> AddToPotion(long potionId, Ingredient ingredient)
     {
         var potion = await _context.Potions
             .Include(r => r.Ingredients)
@@ -224,18 +224,18 @@ public class PotionService : IPotionService
                 await _context.Recipes.AddAsync(discoveredRecipe);
             }
         }
-        await _context.SaveChangesAsync();
-        return potion;
+        var resultCount = await _context.SaveChangesAsync();
+        return resultCount > 0 ? potion : null;
     }
 
-    public async Task<Potion> GetPotionById(long potionId)
+    public async Task<Potion?> GetPotionById(long potionId)
     {
         return await _context.Potions
             .Include(p => p.Maker)
             .Include(p => p.Ingredients)
             .AsNoTracking()
             .Where(p => p.ID == potionId)
-            .SingleAsync();
+            .SingleOrDefaultAsync();
     }
 
     public async Task<List<Recipe>> GetPotionHelpById(long potionId)

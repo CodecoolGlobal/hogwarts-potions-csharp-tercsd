@@ -1,4 +1,6 @@
-﻿using HogwartsPotionsBackend.Models.Entities;
+﻿using AutoMapper;
+using HogwartsPotionsBackend.Models.DTOs;
+using HogwartsPotionsBackend.Models.Entities;
 using HogwartsPotionsBackend.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -10,52 +12,75 @@ namespace HogwartsPotionsBackend.Controllers;
 public class PotionController : ControllerBase
 {
     private readonly IPotionService _service;
+    private readonly IMapper _mapper;
 
-    public PotionController(IPotionService service)
+    public PotionController(IPotionService service, IMapper mapper)
     {
         _service = service;
+        _mapper = mapper;
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<Potion>>> GetAllPotions()
+    public async Task<ActionResult<List<PotionDTO>>> GetAllPotions()
     {
-        return Ok(await _service.GetAllPotions());
+        var potions = await _service.GetAllPotions();
+        var potionDTOs = _mapper.Map<IEnumerable<PotionDTO>>(potions);
+        return Ok(potionDTOs);
     }
 
     [HttpPost]
-    public async Task<ActionResult<Potion>> AddPotion([FromBody] Recipe potion)
+    public async Task<ActionResult<PotionDTO>> AddPotion([FromBody] NewRecipeDTO newRecipeDTO)
     {
-        return Ok(await _service.AddPotion(potion));
+        var recipe = _mapper.Map<Recipe>(newRecipeDTO);
+        var newPotion = await _service.AddPotion(recipe);
+        if (newPotion == null) return BadRequest();
+        var potionDTO = _mapper.Map<PotionDTO>(newPotion);
+        return Ok(potionDTO);
     }
 
 
     [HttpGet("/potions/student/{studentId}")]
-    public async Task<ActionResult<List<Potion>>> GetAllPotionsByStudent(long studentId)
+    public async Task<ActionResult<List<PotionDTO>>> GetAllPotionsByStudent(long studentId)
     {
-        return Ok(await _service.GetAllPotionsByStudent(studentId));
+        var potions = await _service.GetAllPotionsByStudent(studentId);
+        var potionDTOs = _mapper.Map<IEnumerable<PotionDTO>>(potions);
+        return Ok(potionDTOs);
     }
 
     [HttpPost("/potions/brew")]
-    public async Task<ActionResult<Potion>> AddBrewingPotion([FromBody] Recipe potion)
+    public async Task<ActionResult<PotionDTO>> AddBrewingPotion([FromBody] RecipeDTO recipeDTO)
     {
-        return Ok(await _service.AddBrewingPotion(potion));
+        var recipe = _mapper.Map<Recipe>(recipeDTO);
+        var potion = await _service.AddBrewingPotion(recipe);
+        if (potion == null) return BadRequest();
+        var potionDTO = _mapper.Map<PotionDTO>(potion);
+        return Ok(potionDTO);
     }
 
     [HttpPut("/potions/{potionId}/add")]
-    public async Task<ActionResult<Potion>> AddToPotion(long potionId, [FromBody] Ingredient ingredient)
+    public async Task<ActionResult<PotionDTO>> AddToPotion(long potionId, [FromBody] IngredientDTO ingredientDTO)
     {
-        return Ok(await _service.AddToPotion(potionId, ingredient));
+        var ingredient = _mapper.Map<Ingredient>(ingredientDTO);
+        var potion = await _service.AddToPotion(potionId, ingredient);
+        if (potion == null) return BadRequest();
+        var potionDTO = _mapper.Map<PotionDTO>(potion);
+        return Ok(potionDTO);
     }
 
     [HttpGet("/potions/{potionId}")]
-    public async Task<ActionResult<Potion>> GetPotionById(long potionId)
+    public async Task<ActionResult<PotionDTO>> GetPotionById(long potionId)
     {
-        return Ok(await _service.GetPotionById(potionId));
+        var potion = await _service.GetPotionById(potionId);
+        if (potion == null) return NotFound();
+        var potionDTO = _mapper.Map<PotionDTO>(potion);
+        return Ok(potionDTO);
     }
 
     [HttpGet("/potions/{potionId}/help")]
-    public async Task<ActionResult<List<Recipe>>> GetPotionHelpById(long potionId)
+    public async Task<ActionResult<List<RecipeDTO>>> GetPotionHelpById(long potionId)
     {
-        return Ok(await _service.GetPotionHelpById(potionId));
+        var recipe = await _service.GetPotionHelpById(potionId);
+        var recipeDTO = _mapper.Map<RecipeDTO>(recipe);
+        return Ok(recipeDTO);
     }
 }
