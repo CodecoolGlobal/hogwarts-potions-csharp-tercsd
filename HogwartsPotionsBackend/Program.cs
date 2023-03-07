@@ -1,6 +1,7 @@
 using HogwartsPotions.Data;
 using HogwartsPotions.Models;
 using HogwartsPotions.Services;
+using HogwartsPotionsBackend.Configurations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -28,6 +29,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IRoomService, RoomService>();
 builder.Services.AddScoped<IPotionService, PotionService>();
+
+builder.Services.AddAutoMapper(typeof(AutoMapperConfig));
 
 var app = builder.Build();
 
