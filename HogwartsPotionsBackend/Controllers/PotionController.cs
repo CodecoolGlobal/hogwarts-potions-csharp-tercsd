@@ -17,45 +17,45 @@ public class PotionController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<List<Potion>> GetAllPotions()
+    public async Task<ActionResult<List<Potion>>> GetAllPotions()
     {
-        return await _service.GetAllPotions();
+        return Ok(await _service.GetAllPotions());
     }
 
     [HttpPost]
-    public async Task<Potion> AddPotion([FromBody] Recipe potion)
+    public async Task<ActionResult<Potion>> AddPotion([FromBody] Recipe potion)
     {
-        return await _service.AddPotion(potion);
+        return Ok(await _service.AddPotion(potion));
     }
 
 
     [HttpGet("/potions/student/{studentId}")]
-    public async Task<List<Potion>> GetAllPotionsByStudent(long studentId)
+    public async Task<ActionResult<List<Potion>>> GetAllPotionsByStudent(long studentId)
     {
-        return await _service.GetAllPotionsByStudent(studentId);
+        return Ok(await _service.GetAllPotionsByStudent(studentId));
     }
 
     [HttpPost("/potions/brew")]
-    public async Task<Potion> AddBrewingPotion([FromBody] Recipe potion)
+    public async Task<ActionResult<Potion>> AddBrewingPotion([FromBody] Recipe potion)
     {
-        return await _service.AddBrewingPotion(potion);
+        return Ok(await _service.AddBrewingPotion(potion));
     }
 
     [HttpPut("/potions/{potionId}/add")]
-    public async Task<Potion> AddToPotion(long potionId, [FromBody] Ingredient ingredient)
+    public async Task<ActionResult<Potion>> AddToPotion(long potionId, [FromBody] Ingredient ingredient)
     {
-        return await _service.AddToPotion(potionId, ingredient);
+        return Ok(await _service.AddToPotion(potionId, ingredient));
     }
 
     [HttpGet("/potions/{potionId}")]
-    public async Task<Potion> GetPotionById(long potionId)
+    public async Task<ActionResult<Potion>> GetPotionById(long potionId)
     {
-        return await _service.GetPotionById(potionId);
+        return Ok(await _service.GetPotionById(potionId));
     }
 
     [HttpGet("/potions/{potionId}/help")]
-    public async Task<List<Recipe>> GetPotionHelpById(long potionId)
+    public async Task<ActionResult<List<Recipe>>> GetPotionHelpById(long potionId)
     {
-        return await _service.GetPotionHelpById(potionId);
+        return Ok(await _service.GetPotionHelpById(potionId));
     }
 }
