@@ -62,3 +62,4 @@ The project is based on the following rules:
 - Clone the repository
 - Build the solution
 - Run the solution in Visual Studio with IIS Express
+- Test it with the Postman collection provided in the solution folder

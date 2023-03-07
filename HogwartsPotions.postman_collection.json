@@ -1,0 +1,348 @@
+{
+	"info": {
+		"_postman_id": "eefc74e0-1c20-40d6-8810-4db47beb86d2",
+		"name": "HogwartsPotions",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22342610"
+	},
+	"item": [
+		{
+			"name": "GetAllRooms",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44354/room/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44354",
+					"path": [
+						"room",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetRoomById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44354/room/1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44354",
+					"path": [
+						"room",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddRoom",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Capacity\": 5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44354/room/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44354",
+					"path": [
+						"room",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateRoomById",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Capacity\": 5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44354/room/6",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44354",
+					"path": [
+						"room",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteRoomById",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44354/room/6",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44354",
+					"path": [
+						"room",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAvailableRooms",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44354/room/available",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44354",
+					"path": [
+						"room",
+						"available"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetRoomsForRatOwners",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44354/room/rat-owners/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44354",
+					"path": [
+						"room",
+						"rat-owners",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllPotions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44354/potions/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44354",
+					"path": [
+						"potions",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetPotionsByStudentId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44354/potions/student/1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44354",
+					"path": [
+						"potions",
+						"student",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddPotion (Replica)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Name\": \"Test Replica Potion\",\r\n    \"StudentID\": 1,\r\n    \"Ingredients\": [\r\n        {\r\n            \"Name\": \"Lacewing Flies\"\r\n        },\r\n        {\r\n            \"Name\": \"Leeches\"\r\n        },\r\n        {\r\n            \"Name\": \"Powdered Bicorn Horn\"\r\n        },\r\n        {\r\n            \"Name\": \"Knotgrass\"\r\n        },\r\n        {\r\n            \"Name\": \"Fluxweed\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44354/potions/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44354",
+					"path": [
+						"potions",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddPotion (Discovery)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Name\": \"Test Discovery Potion\",\r\n    \"StudentID\": 1,\r\n    \"Ingredients\": [\r\n        {\r\n            \"Name\": \"Test Ingredient 1\"\r\n        },\r\n        {\r\n            \"Name\": \"Leeches\"\r\n        },\r\n        {\r\n            \"Name\": \"Powdered Bicorn Horn\"\r\n        },\r\n        {\r\n            \"Name\": \"Knotgrass\"\r\n        },\r\n        {\r\n            \"Name\": \"Fluxweed\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44354/potions/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44354",
+					"path": [
+						"potions",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddPotion (Brew)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Name\": \"Test Brew Potion\",\r\n    \"StudentID\": 1,\r\n    \"Ingredients\": [\r\n        {\r\n            \"Name\": \"Leeches\"\r\n        },\r\n        {\r\n            \"Name\": \"Powdered Bicorn Horn\"\r\n        },\r\n        {\r\n            \"Name\": \"Knotgrass\"\r\n        },\r\n        {\r\n            \"Name\": \"Fluxweed\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44354/potions/brew",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44354",
+					"path": [
+						"potions",
+						"brew"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddToPotion (Ingredient)",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Name\": \"Lacewing Flies\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44354/potions/10/add",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44354",
+					"path": [
+						"potions",
+						"10",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetPotionHelpById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44354/potions/student/1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44354",
+					"path": [
+						"potions",
+						"student",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
